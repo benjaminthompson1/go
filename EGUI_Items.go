@@ -25,9 +25,15 @@ type Response struct {
 }
 
 func main() {
+        // Introductory message informing users of the interface being used.
+        fmt.Println("Using z/OS Connect to interface with CICS transaction EGUI...")
+
 	// Define the URL from which the data will be retrieved.
 	url := "http://zcee.zpdt.duckdns.org/catalogManager/items/30"
-
+    
+	// Note the time before executing the request
+        startTime := time.Now()
+	
 	// Use the 'curl' command to fetch data from the specified URL.
 	cmd := exec.Command("curl", "-s", url)
 	output, err := cmd.Output()
@@ -38,6 +44,9 @@ func main() {
 		return
 	}
 
+        // Note the time after executing the request
+        endTime := time.Now()
+	
 	// Initialize a Response struct to store the unmarshaled data.
 	var res Response
 
